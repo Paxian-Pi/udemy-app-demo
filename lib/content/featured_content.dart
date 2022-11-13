@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
@@ -16,6 +17,9 @@ class FeaturedContent extends StatefulWidget {
 }
 
 class _FeaturedContentState extends State<FeaturedContent> {
+
+  bool _isInfoBar = true;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -24,6 +28,50 @@ class _FeaturedContentState extends State<FeaturedContent> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // * Section 1
+          Visibility(
+            visible: _isInfoBar,
+            maintainSize: false,
+            maintainAnimation: true,
+            maintainState: true,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: 6.h,
+              decoration: BoxDecoration(
+                color: Colors.purple[700]
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Container(
+                      margin: EdgeInsets.only(left: 50.sp, right: 15.sp),
+                      child: const Text(
+                        'Future-ready skills on your schedule',
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      HapticFeedback.vibrate();
+                      SystemSound.play(SystemSoundType.click);
+
+                      setState(() {
+                        _isInfoBar = false;
+                      });
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 20.sp),
+                      child: const Icon(
+                        Icons.clear,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.3,
@@ -65,14 +113,36 @@ class _FeaturedContentState extends State<FeaturedContent> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Categories',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Categories',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        HapticFeedback.vibrate();
+                        SystemSound.play(SystemSoundType.click);
+
+                        showSnackbar('Not available...', 'This is a demo app!');
+                      },
+                      child: Text(
+                        'See all',
+                        style: TextStyle(
+                          color: Colors.purple[700],
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+                const SizedBox(height: 10),
                 SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
