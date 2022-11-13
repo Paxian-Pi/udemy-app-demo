@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 const imagePath = 'assets/img-main.jpg';
+const pax = 'assets/pax.jpg';
 const star = 'assets/star.png';
 const star2 = 'assets/star2.png';
 const search = 'assets/search.png';

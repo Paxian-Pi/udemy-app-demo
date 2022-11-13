@@ -3,7 +3,7 @@ import 'package:sizer/sizer.dart';
 import 'package:udemy_clone/utils/constants.dart';
 import 'package:udemy_clone/widgets/star_icon.dart';
 
-class CustomCard extends StatelessWidget {
+class VerticalCardLayout extends StatelessWidget {
   final String imagePath;
   final String title;
   final String tutor;
@@ -13,7 +13,7 @@ class CustomCard extends StatelessWidget {
   final bool isBestSeller;
   final Function onCardTap;
 
-  const CustomCard({
+  const VerticalCardLayout({
     Key? key,
     required this.imagePath,
     required this.title,

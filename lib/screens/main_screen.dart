@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:udemy_clone/data/navBarItem.dart';
-import 'package:udemy_clone/widgets/my_learning_content.dart';
+import 'package:udemy_clone/screens/my_learning.dart';
+import 'package:udemy_clone/service/app_state.dart';
 import 'package:get/get.dart';
-import 'package:udemy_clone/widgets/featured_content.dart';
+
+import '../content/featured_content.dart';
+import '../content/my_learning_content.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -13,50 +16,107 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final appStateController = Get.put(AppState());
+
   int _selectedIndex = 0;
 
-  bool isFeatured = true;
+  // bool isFeatured = true;
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('${appStateController.isFeatured}');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         shadowColor: Colors.transparent,
-        title: Visibility(
-          visible: !isFeatured,
-          maintainSize: true,
-          maintainAnimation: true,
-          maintainState: true,
-          child: const Text(
-            'My courses',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-            ),
-          ),
+        title: Row(
+          children: [
+            Obx(() {
+              return GestureDetector(
+                onTap: () {
+                  HapticFeedback.vibrate();
+                  SystemSound.play(SystemSoundType.click);
+
+                  if (appStateController.isFilterIconVisible.isTrue) {
+                    appStateController.setFIlterIconState();
+                    appStateController.setSearchIconState();
+                    appStateController.setMyCoursesTextState();
+                    appStateController.setBackArrowState();
+                  }
+                },
+                child: Visibility(
+                  visible: appStateController.isBackArrow.isTrue,
+                  maintainSize: false,
+                  maintainAnimation: true,
+                  maintainState: true,
+                  child: const Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Colors.black,
+                  ),
+                ),
+              );
+            }),
+            Obx(() {
+              return Visibility(
+                visible: appStateController.isMyCoursesTextVisible.isTrue,
+                maintainSize: false,
+                maintainAnimation: true,
+                maintainState: true,
+                child: const Text(
+                  'My courses',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            }),
+          ],
         ),
         actions: [
-          Visibility(
-            visible: !isFeatured,
-            maintainSize: true,
-            maintainAnimation: true,
-            maintainState: true,
-            child: IconButton(
-              onPressed: () {
-                HapticFeedback.vibrate();
-                SystemSound.play(SystemSoundType.click);
+          Obx(() {
+            return Visibility(
+              visible: appStateController.isFilterIconVisible.isTrue,
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              child: IconButton(
+                onPressed: () {
+                  HapticFeedback.vibrate();
+                  SystemSound.play(SystemSoundType.click);
 
-                showSnackbar(SnackPosition.BOTTOM, 'Search - Not active now...',
-                    'Check back later!');
-              },
-              icon: const Icon(
-                Icons.search,
-                color: Colors.black,
+                  showSnackbar(SnackPosition.BOTTOM,
+                      'Filter - Not active now...', 'Check back later!');
+                },
+                icon: const Icon(
+                  Icons.filter_list,
+                  color: Colors.black,
+                ),
               ),
-            ),
-          ),
+            );
+          }),
+          Obx(() {
+            return Visibility(
+              visible: appStateController.isNavbarSearIconVisible.isTrue,
+              maintainSize: false,
+              maintainAnimation: true,
+              maintainState: true,
+              child: IconButton(
+                onPressed: () {
+                  HapticFeedback.vibrate();
+                  SystemSound.play(SystemSoundType.click);
+
+                  showSnackbar(SnackPosition.BOTTOM,
+                      'Search - Not active now...', 'Check back later!');
+                },
+                icon: const Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ),
+              ),
+            );
+          }),
           IconButton(
             onPressed: () {
               HapticFeedback.vibrate();
@@ -72,7 +132,9 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: isFeatured ? const FeaturedContent() : const MyLearningContent(),
+      body: appStateController.isFeatured.isTrue
+          ? const FeaturedContent()
+          : const MyLearning(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         currentIndex: _selectedIndex,
@@ -224,7 +286,7 @@ class _MainScreenState extends State<MainScreen> {
 
   void _onItemTapped(int index) {
     HapticFeedback.vibrate();
-    SystemSound.play(SystemSoundType.click);
+    // SystemSound.play(SystemSoundType.click);
 
     setState(() => _selectedIndex = index);
 
@@ -232,10 +294,34 @@ class _MainScreenState extends State<MainScreen> {
 
     switch (index) {
       case 0:
-        isFeatured = true;
+        if (appStateController.isFeatured.isFalse) {
+          appStateController.changeTabStatus();
+          appStateController.setSearchIconState();
+          appStateController.setMyCoursesTextState();
+        }
+
+        if (appStateController.isFilterIconVisible.isTrue) {
+          appStateController.setFIlterIconState();
+          appStateController.setSearchIconState();
+          appStateController.setMyCoursesTextState();
+          appStateController.setBackArrowState();
+        }
+        // isFeatured = true;
         break;
       case 2:
-        isFeatured = false;
+        if (appStateController.isFeatured.isTrue) {
+          appStateController.changeTabStatus();
+          appStateController.setSearchIconState();
+          appStateController.setMyCoursesTextState();
+        }
+
+        if (appStateController.isFilterIconVisible.isTrue) {
+          appStateController.setFIlterIconState();
+          appStateController.setSearchIconState();
+          appStateController.setMyCoursesTextState();
+          appStateController.setBackArrowState();
+        }
+        // isFeatured = false;
         break;
     }
 

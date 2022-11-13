@@ -5,7 +5,7 @@ import 'package:udemy_clone/data/categories.dart';
 import 'package:udemy_clone/data/courses.dart';
 import 'package:udemy_clone/widgets/custom_button.dart';
 import 'package:get/get.dart';
-import 'package:udemy_clone/widgets/custom_card.dart';
+import 'package:udemy_clone/widgets/vertical_card_layout.dart';
 import 'package:udemy_clone/widgets/rich_text.dart';
 
 class FeaturedContent extends StatefulWidget {
@@ -152,7 +152,7 @@ class _FeaturedContentState extends State<FeaturedContent> {
                         children: dev
                             .map((e) => Padding(
                                   padding: const EdgeInsets.only(right: 15.0),
-                                  child: CustomCard(
+                                  child: VerticalCardLayout(
                                     onCardTap: () {
                                       HapticFeedback.vibrate();
                                       SystemSound.play(SystemSoundType.click);
@@ -201,7 +201,7 @@ class _FeaturedContentState extends State<FeaturedContent> {
                         children: itAndSoftware
                             .map((e) => Padding(
                                   padding: const EdgeInsets.only(right: 15.0),
-                                  child: CustomCard(
+                                  child: VerticalCardLayout(
                                     onCardTap: () {
                                       HapticFeedback.vibrate();
                                       SystemSound.play(SystemSoundType.click);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:udemy_clone/screens/main_screen.dart';
+import 'package:udemy_clone/screens/splash_screen.dart';
 import 'package:udemy_clone/utils/constants.dart';
 
 void main() async {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
             primaryColor: kPrimaryColor,
             scaffoldBackgroundColor: kPrimaryColor,
           ),
-          home: const MainScreen(),
+          home: const SplashScreen(),
         );
       },
     );
