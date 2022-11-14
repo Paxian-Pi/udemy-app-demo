@@ -7,7 +7,7 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
@@ -50,36 +50,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ),
-            // Positioned(
-            //   left: 0,
-            //   right: 0,
-            //   bottom: 0,
-            //   child: Column(
-            //     children: [
-            //       AnimatedContainer(
-            //         duration: const Duration(milliseconds: 1500),
-            //         height: _height,
-            //         curve: Curves.bounceInOut,
-            //         child: Center(
-            //           child: Image.asset(
-            //             'assets/football.png',
-            //             key: UniqueKey(),
-            //             width: 120,
-            //             height: 120,
-            //           ),
-            //         ),
-            //       ),
-            //       Center(
-            //         child: Image.asset(
-            //           'assets/quizza_200.png',
-            //           key: UniqueKey(),
-            //           width: 200,
-            //           height: 200,
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),
