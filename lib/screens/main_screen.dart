@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 import '../content/featured_content.dart';
 import '../content/my_learning_content.dart';
+import '../utils/methods.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -50,10 +51,12 @@ class _MainScreenState extends State<MainScreen> {
                   SystemSound.play(SystemSoundType.click);
 
                   if (appStateController.isFilterIconVisible.isTrue) {
-                    appStateController.setFIlterIconState();
-                    appStateController.setSearchIconState();
-                    appStateController.setMyCoursesTextState();
-                    appStateController.setBackArrowState();
+                    // appStateController.setFIlterIconState();
+                    // appStateController.setSearchIconState();
+                    // appStateController.setMyCoursesTextState();
+                    // appStateController.setBackArrowState();
+
+                    showFilterIcon();
                   }
                 },
                 child: Visibility(
@@ -96,7 +99,7 @@ class _MainScreenState extends State<MainScreen> {
               child: IconButton(
                 onPressed: () {
                   HapticFeedback.vibrate();
-                  SystemSound.play(SystemSoundType.click);
+                  // SystemSound.play(SystemSoundType.click);
 
                   showSnackbar(SnackPosition.BOTTOM,
                       'Filter - Not active now...', 'Check back later!');
@@ -117,7 +120,7 @@ class _MainScreenState extends State<MainScreen> {
               child: IconButton(
                 onPressed: () {
                   HapticFeedback.vibrate();
-                  SystemSound.play(SystemSoundType.click);
+                  // SystemSound.play(SystemSoundType.click);
 
                   showSnackbar(SnackPosition.BOTTOM,
                       'Search - Not active now...', 'Check back later!');
@@ -132,7 +135,7 @@ class _MainScreenState extends State<MainScreen> {
           IconButton(
             onPressed: () {
               HapticFeedback.vibrate();
-              SystemSound.play(SystemSoundType.click);
+              // SystemSound.play(SystemSoundType.click);
 
               showSnackbar(SnackPosition.BOTTOM, 'Checkout - Not active now...',
                   'Check back later!');
@@ -312,31 +315,21 @@ class _MainScreenState extends State<MainScreen> {
     switch (index) {
       case 0:
         if (appStateController.isFeatured.isFalse) {
-          appStateController.changeTabStatus();
-          appStateController.setSearchIconState();
-          appStateController.setMyCoursesTextState();
+          showFeaturedOrMyLearningContent();
         }
 
         if (appStateController.isFilterIconVisible.isTrue) {
-          appStateController.setFIlterIconState();
-          appStateController.setSearchIconState();
-          appStateController.setMyCoursesTextState();
-          appStateController.setBackArrowState();
+          showFilterIcon();
         }
         // isFeatured = true;
         break;
       case 2:
         if (appStateController.isFeatured.isTrue) {
-          appStateController.changeTabStatus();
-          appStateController.setSearchIconState();
-          appStateController.setMyCoursesTextState();
+          showFeaturedOrMyLearningContent();
         }
 
         if (appStateController.isFilterIconVisible.isTrue) {
-          appStateController.setFIlterIconState();
-          appStateController.setSearchIconState();
-          appStateController.setMyCoursesTextState();
-          appStateController.setBackArrowState();
+          showFilterIcon();
         }
         // isFeatured = false;
         break;
