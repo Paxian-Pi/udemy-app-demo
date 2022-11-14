@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_clone/data/navBarItem.dart';
 import 'package:udemy_clone/screens/my_learning.dart';
 import 'package:udemy_clone/service/app_state.dart';
@@ -18,9 +21,18 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final appStateController = Get.put(AppState());
 
+  late SharedPreferences _pref;
+
   int _selectedIndex = 0;
 
   // bool isFeatured = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _tabSelector();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -284,7 +296,12 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  void _onItemTapped(int index) {
+  void _tabSelector() async {
+    _pref = await SharedPreferences.getInstance();
+    _pref.setInt('tabIndex', _selectedIndex);
+  }
+
+  void _onItemTapped(int index) async {
     HapticFeedback.vibrate();
     // SystemSound.play(SystemSoundType.click);
 
@@ -326,6 +343,9 @@ class _MainScreenState extends State<MainScreen> {
     }
 
     if (index == 0 || index == 2) {
+      _pref = await SharedPreferences.getInstance();
+      _pref.setInt('tabIndex', index);
+
       return;
       // Get.to(
       //   () => const MyLearning(),
@@ -335,6 +355,18 @@ class _MainScreenState extends State<MainScreen> {
     }
 
     showSnackbar(SnackPosition.TOP, 'Not active now...', 'Check back later!');
+
+    if(_pref.getInt('tabIndex') == 0 && (index == 1 || index == 3 || index == 4)) {
+      Timer(const Duration(milliseconds: 1500), () {
+        setState(() => _selectedIndex = 0);
+      });
+    }
+
+    if(_pref.getInt('tabIndex') == 2 && (index == 1 || index == 3 || index == 4)) {
+      Timer(const Duration(milliseconds: 1500), () {
+        setState(() => _selectedIndex = 2);
+      });
+    }
   }
 
   void showSnackbar(SnackPosition position, String title, String message) {

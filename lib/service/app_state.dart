@@ -6,6 +6,7 @@ class AppState extends GetxController {
   RxBool isFilterIconVisible = false.obs;
   RxBool isMyCoursesTextVisible = false.obs;
   RxBool isBackArrow = false.obs;
+  RxInt selectedIndex = 0.obs;
 
   void changeTabStatus() {
     isFeatured.toggle();
@@ -25,5 +26,8 @@ class AppState extends GetxController {
   
   void setBackArrowState() {
     isBackArrow.toggle();
+  }
+  void setTabIndex() {
+    selectedIndex.value;
   }
 }
