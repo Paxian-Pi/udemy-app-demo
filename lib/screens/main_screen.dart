@@ -26,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
 
   int _selectedIndex = 0;
 
-  // bool isFeatured = true;
+  bool _isFeatured = true;
 
   @override
   void initState() {

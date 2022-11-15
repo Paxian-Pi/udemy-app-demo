@@ -18,13 +18,13 @@ class MyLearningContent extends StatefulWidget {
 }
 
 class _MyLearningContentState extends State<MyLearningContent> {
-  final appStateController = Get.put(AppState());
+  final AppState appStateController = Get.find();
 
   late SharedPreferences _pref;
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('filter State: ${appStateController.isFilterIconVisible}');
+    debugPrint('filter icon visible: ${appStateController.isFilterIconVisible}');
     return WillPopScope(
       onWillPop: () async {
         if (appStateController.isFeatured.isFalse) {
@@ -78,7 +78,7 @@ class _MyLearningContentState extends State<MyLearningContent> {
                         SystemSound.play(SystemSoundType.click);
 
                         appStateController.setSearchIconState();
-                        appStateController.setFIlterIconState();
+                        appStateController.setFilterIconState();
                         appStateController.setMyCoursesTextState();
                         appStateController.setBackArrowState();
                       },

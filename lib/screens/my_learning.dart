@@ -17,14 +17,13 @@ class MyLearning extends StatefulWidget {
 }
 
 class _MyLearningState extends State<MyLearning> {
-  final appStateController = Get.put(AppState());
+  final AppState appStateController = Get.find();
 
   late SharedPreferences _pref;
 
   @override
   Widget build(BuildContext context) {
     debugPrint('tab index: ${appStateController.selectedIndex.value}');
-
     return Scaffold(
       body: Obx(() {
         return appStateController.isFilterIconVisible.isTrue

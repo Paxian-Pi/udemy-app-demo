@@ -21,10 +21,11 @@ class DevContent extends StatefulWidget {
 }
 
 class _DevContentState extends State<DevContent> {
-  final appStateController = Get.put(AppState());
+  final AppState appStateController = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('filter icon visible: ${appStateController.isFilterIconVisible}');
     return WillPopScope(
       onWillPop: (() async {
         if (appStateController.isFilterIconVisible.isTrue) {

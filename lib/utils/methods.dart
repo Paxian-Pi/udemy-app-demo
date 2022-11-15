@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../service/app_state.dart';
 
-final appStateController = Get.put(AppState());
+final AppState appStateController = Get.find();
 
 void showFeaturedOrMyLearningContent() {
   appStateController.changeTabStatus();
@@ -12,7 +12,7 @@ void showFeaturedOrMyLearningContent() {
 }
 
 void showFilterIcon() {
-  appStateController.setFIlterIconState();
+  appStateController.setFilterIconState();
   appStateController.setSearchIconState();
   appStateController.setMyCoursesTextState();
   appStateController.setBackArrowState();
