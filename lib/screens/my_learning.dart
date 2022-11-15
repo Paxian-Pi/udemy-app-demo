@@ -25,24 +25,12 @@ class _MyLearningState extends State<MyLearning> {
   Widget build(BuildContext context) {
     debugPrint('tab index: ${appStateController.selectedIndex.value}');
 
-    return WillPopScope(
-      onWillPop: () async {
-        if (appStateController.isFeatured.isFalse) {
-          /// return to main activity, on back pressed
-          showFeaturedOrMyLearningContent();
-          setState(() => appStateController.setTabIndex(0));
-
-          return false;
-        }
-        return true;
-      },
-      child: Scaffold(
-        body: Obx(() {
-          return appStateController.isFilterIconVisible.isTrue
-              ? const DevContent()
-              : appStateController.selectedIndex.value == 0 ? const FeaturedContent() : const MyLearningContent();
-        }),
-      ),
+    return Scaffold(
+      body: Obx(() {
+        return appStateController.isFilterIconVisible.isTrue
+            ? const DevContent()
+            : appStateController.selectedIndex.value == 0 ? const FeaturedContent() : const MyLearningContent();
+      }),
     );
   }
 }
