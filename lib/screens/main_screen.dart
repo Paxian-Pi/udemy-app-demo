@@ -150,30 +150,33 @@ class _MainScreenState extends State<MainScreen> {
       body: appStateController.isFeatured.isTrue
           ? const FeaturedContent()
           : const MyLearning(),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        currentIndex: _selectedIndex,
-        showSelectedLabels: true,
-        showUnselectedLabels: false,
-        fixedColor: Colors.black,
-        type: BottomNavigationBarType.fixed,
-        onTap: _onItemTapped,
-        items: navBarItem
-            .map(
-              (e) => BottomNavigationBarItem(
-                icon: Image.asset(
-                  '${e['icon']}',
-                  width: 24.0,
-                ),
-                activeIcon: Image.asset(
-                  '${e['activeIcon']}',
-                  width: 24.0,
-                ),
-                label: '${e['label']}',
+      bottomNavigationBar: Obx(() {
+        return BottomNavigationBar(
+          backgroundColor: Colors.white,
+          // currentIndex: _selectedIndex,
+          currentIndex: appStateController.selectedIndex.value,
+          showSelectedLabels: true,
+          showUnselectedLabels: false,
+          fixedColor: Colors.black,
+          type: BottomNavigationBarType.fixed,
+          onTap: _onItemTapped,
+          items: navBarItem
+              .map(
+                (e) => BottomNavigationBarItem(
+              icon: Image.asset(
+                '${e['icon']}',
+                width: 24.0,
               ),
-            )
-            .toList(),
-      ),
+              activeIcon: Image.asset(
+                '${e['activeIcon']}',
+                width: 24.0,
+              ),
+              label: '${e['label']}',
+            ),
+          )
+              .toList(),
+        );
+      }),
 
       // body: CustomScrollView(
       //   slivers: [
@@ -301,16 +304,17 @@ class _MainScreenState extends State<MainScreen> {
 
   void _tabSelector() async {
     _pref = await SharedPreferences.getInstance();
-    _pref.setInt('tabIndex', _selectedIndex);
+    _pref.setInt('tabIndex', appStateController.selectedIndex.value);
   }
 
   void _onItemTapped(int index) async {
     HapticFeedback.vibrate();
     // SystemSound.play(SystemSoundType.click);
 
-    setState(() => _selectedIndex = index);
+    // setState(() => _selectedIndex = index);
+    setState(() => appStateController.setTabIndex(index));
 
-    debugPrint('$index');
+    debugPrint('${appStateController.selectedIndex.value}');
 
     switch (index) {
       case 0:
@@ -351,13 +355,15 @@ class _MainScreenState extends State<MainScreen> {
 
     if(_pref.getInt('tabIndex') == 0 && (index == 1 || index == 3 || index == 4)) {
       Timer(const Duration(milliseconds: 1500), () {
-        setState(() => _selectedIndex = 0);
+        // setState(() => _selectedIndex = 0);
+        setState(() => appStateController.setTabIndex(0));
       });
     }
 
     if(_pref.getInt('tabIndex') == 2 && (index == 1 || index == 3 || index == 4)) {
       Timer(const Duration(milliseconds: 1500), () {
-        setState(() => _selectedIndex = 2);
+        // setState(() => _selectedIndex = 2);
+        setState(() => appStateController.setTabIndex(2));
       });
     }
   }

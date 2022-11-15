@@ -27,7 +27,7 @@ class AppState extends GetxController {
   void setBackArrowState() {
     isBackArrow.toggle();
   }
-  void setTabIndex() {
-    selectedIndex.value;
+  void setTabIndex(int value) {
+    selectedIndex.value = value;
   }
 }

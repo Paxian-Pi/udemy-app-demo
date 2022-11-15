@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:udemy_clone/data/categories.dart';
 import 'package:udemy_clone/data/courses.dart';
 import 'package:udemy_clone/utils/constants.dart';
+import 'package:udemy_clone/utils/methods.dart';
 import 'package:udemy_clone/widgets/custom_button.dart';
 import 'package:get/get.dart';
 import 'package:udemy_clone/widgets/instructor_cards.dart';
@@ -27,10 +28,7 @@ class _DevContentState extends State<DevContent> {
     return WillPopScope(
       onWillPop: (() async {
         if (appStateController.isFilterIconVisible.isTrue) {
-          appStateController.setFIlterIconState();
-          appStateController.setSearchIconState();
-          appStateController.setMyCoursesTextState();
-          appStateController.setBackArrowState();
+          showFilterIcon();
 
           return false;
         }
