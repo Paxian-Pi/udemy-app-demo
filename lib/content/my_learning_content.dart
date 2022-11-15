@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:udemy_clone/utils/methods.dart';
 
@@ -19,15 +20,20 @@ class MyLearningContent extends StatefulWidget {
 class _MyLearningContentState extends State<MyLearningContent> {
   final appStateController = Get.put(AppState());
 
+  late SharedPreferences _pref;
+
   @override
   Widget build(BuildContext context) {
     debugPrint('filter State: ${appStateController.isFilterIconVisible}');
     return WillPopScope(
       onWillPop: () async {
         if (appStateController.isFeatured.isFalse) {
-          /// return to main activity, on back pressed
+          /// return to main activity with default parameters, on back pressed
           showFeaturedOrMyLearningContent();
           setState(() => appStateController.setTabIndex(0));
+
+          _pref = await SharedPreferences.getInstance();
+          _pref.setInt('tabIndex', 0);
 
           return false;
         }
