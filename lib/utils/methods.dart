@@ -11,7 +11,7 @@ void showFeaturedOrMyLearningContent() {
   appStateController.setMyCoursesTextState();
 }
 
-void showFilterIcon() {
+void showOrHideFilterIcon() {
   appStateController.setFilterIconState();
   appStateController.setSearchIconState();
   appStateController.setMyCoursesTextState();

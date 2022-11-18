@@ -25,11 +25,12 @@ class _DevContentState extends State<DevContent> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('filter icon visible: ${appStateController.isFilterIconVisible}');
+    debugPrint(
+        'filter icon visible: ${appStateController.isFilterIconVisible}');
     return WillPopScope(
       onWillPop: (() async {
         if (appStateController.isFilterIconVisible.isTrue) {
-          showFilterIcon();
+          showOrHideFilterIcon();
 
           return false;
         }

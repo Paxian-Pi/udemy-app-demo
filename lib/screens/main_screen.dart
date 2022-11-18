@@ -58,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
                     // appStateController.setMyCoursesTextState();
                     // appStateController.setBackArrowState();
 
-                    showFilterIcon();
+                    showOrHideFilterIcon();
                   }
                 },
                 child: Visibility(
@@ -165,17 +165,17 @@ class _MainScreenState extends State<MainScreen> {
           items: navBarItem
               .map(
                 (e) => BottomNavigationBarItem(
-              icon: Image.asset(
-                '${e['icon']}',
-                width: 24.0,
-              ),
-              activeIcon: Image.asset(
-                '${e['activeIcon']}',
-                width: 24.0,
-              ),
-              label: '${e['label']}',
-            ),
-          )
+                  icon: Image.asset(
+                    '${e['icon']}',
+                    width: 24.0,
+                  ),
+                  activeIcon: Image.asset(
+                    '${e['activeIcon']}',
+                    width: 24.0,
+                  ),
+                  label: '${e['label']}',
+                ),
+              )
               .toList(),
         );
       }),
@@ -330,7 +330,7 @@ class _MainScreenState extends State<MainScreen> {
         }
 
         if (appStateController.isFilterIconVisible.isTrue) {
-          showFilterIcon();
+          showOrHideFilterIcon();
         }
         // isFeatured = true;
         break;
@@ -340,7 +340,7 @@ class _MainScreenState extends State<MainScreen> {
         }
 
         if (appStateController.isFilterIconVisible.isTrue) {
-          showFilterIcon();
+          showOrHideFilterIcon();
         }
         // isFeatured = false;
         break;
@@ -360,14 +360,16 @@ class _MainScreenState extends State<MainScreen> {
 
     showSnackbar(SnackPosition.TOP, 'Not active now...', 'Check back later!');
 
-    if(_pref.getInt('tabIndex') == 0 && (index == 1 || index == 3 || index == 4)) {
+    if (_pref.getInt('tabIndex') == 0 &&
+        (index == 1 || index == 3 || index == 4)) {
       Timer(const Duration(milliseconds: 1500), () {
         // setState(() => _selectedIndex = 0);
         setTabIndex(0);
       });
     }
 
-    if(_pref.getInt('tabIndex') == 2 && (index == 1 || index == 3 || index == 4)) {
+    if (_pref.getInt('tabIndex') == 2 &&
+        (index == 1 || index == 3 || index == 4)) {
       Timer(const Duration(milliseconds: 1500), () {
         // setState(() => _selectedIndex = 2);
         setTabIndex(2);

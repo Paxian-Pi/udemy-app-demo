@@ -34,7 +34,7 @@ class MainScreenStateless extends StatelessWidget {
                         SystemSound.play(SystemSoundType.click);
 
                         if (appController.isFilterIconVisible.isTrue) {
-                          showFilterIcon();
+                          showOrHideFilterIcon();
                         }
                       },
                       child: Visibility(
@@ -179,7 +179,7 @@ class MainScreenStateless extends StatelessWidget {
         }
 
         if (appController.isFilterIconVisible.isTrue) {
-          showFilterIcon();
+          showOrHideFilterIcon();
         }
         // isFeatured = true;
         break;
@@ -189,7 +189,7 @@ class MainScreenStateless extends StatelessWidget {
         }
 
         if (appController.isFilterIconVisible.isTrue) {
-          showFilterIcon();
+          showOrHideFilterIcon();
         }
         // isFeatured = false;
         break;
