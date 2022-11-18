@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_clone/content/dev_content.dart';
 import 'package:udemy_clone/content/featured_content.dart';
 import 'package:udemy_clone/content/my_learning_content.dart';
-import 'package:udemy_clone/screens/main_screen.dart';
 
 import '../service/app_state.dart';
-import '../utils/methods.dart';
 
 class MyLearning extends StatefulWidget {
   const MyLearning({Key? key}) : super(key: key);
@@ -19,8 +16,6 @@ class MyLearning extends StatefulWidget {
 class _MyLearningState extends State<MyLearning> {
   final AppState appStateController = Get.find();
 
-  late SharedPreferences _pref;
-
   @override
   Widget build(BuildContext context) {
     debugPrint('tab index: ${appStateController.selectedIndex.value}');
@@ -28,7 +23,9 @@ class _MyLearningState extends State<MyLearning> {
       body: Obx(() {
         return appStateController.isFilterIconVisible.isTrue
             ? const DevContent()
-            : appStateController.selectedIndex.value == 0 ? const FeaturedContent() : const MyLearningContent();
+            : appStateController.selectedIndex.value == 0
+                ? const FeaturedContent()
+                : const MyLearningContent();
       }),
     );
   }

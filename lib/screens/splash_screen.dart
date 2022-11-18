@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:udemy_clone/screens/main_screen.dart';
+import 'package:udemy_clone/screens/main_screen_stateless.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -22,7 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Timer(const Duration(milliseconds: 5500), () {
       Get.offAll(
-        () => const MainScreen(),
+        // () => const MainScreen(),
+        () => MainScreenStateless(),
         duration: const Duration(milliseconds: 400),
         transition: Transition.rightToLeft,
       );

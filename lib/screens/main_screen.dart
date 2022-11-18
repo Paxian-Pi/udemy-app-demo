@@ -37,7 +37,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('${appStateController.isFeatured}');
+    // debugPrint('${appStateController.isFeatured}');
+    // ever(appStateController.selectedIndex, (value) => debugPrint('value: $value'));
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -307,14 +309,19 @@ class _MainScreenState extends State<MainScreen> {
     _pref.setInt('tabIndex', appStateController.selectedIndex.value);
   }
 
+  void setTabIndex(int index) {
+    setState(() => appStateController.setTabIndex(index));
+    // ever(appStateController.selectedIndex, (_) => appStateController.setTabIndex(index));
+  }
+
   void _onItemTapped(int index) async {
     HapticFeedback.vibrate();
     // SystemSound.play(SystemSoundType.click);
 
     // setState(() => _selectedIndex = index);
-    setState(() => appStateController.setTabIndex(index));
+    setTabIndex(index);
 
-    debugPrint('${appStateController.selectedIndex.value}');
+    // debugPrint('tab index: ${appStateController.selectedIndex.value}');
 
     switch (index) {
       case 0:
@@ -356,14 +363,14 @@ class _MainScreenState extends State<MainScreen> {
     if(_pref.getInt('tabIndex') == 0 && (index == 1 || index == 3 || index == 4)) {
       Timer(const Duration(milliseconds: 1500), () {
         // setState(() => _selectedIndex = 0);
-        setState(() => appStateController.setTabIndex(0));
+        setTabIndex(0);
       });
     }
 
     if(_pref.getInt('tabIndex') == 2 && (index == 1 || index == 3 || index == 4)) {
       Timer(const Duration(milliseconds: 1500), () {
         // setState(() => _selectedIndex = 2);
-        setState(() => appStateController.setTabIndex(2));
+        setTabIndex(2);
       });
     }
   }
