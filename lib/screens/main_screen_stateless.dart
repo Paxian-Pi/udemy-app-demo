@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_clone/service/app_state.dart';
+import 'package:udemy_clone/utils/constants.dart';
 
 import '../content/featured_content.dart';
 import '../data/navBarItem.dart';
@@ -127,7 +128,7 @@ class MainScreenStateless extends StatelessWidget {
             ),
             body: appController.isFeatured.isTrue
                 ? const FeaturedContent()
-                : const MyLearning(),
+                : MyLearning(),
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor: Colors.white,
               // currentIndex: _selectedIndex,
@@ -159,9 +160,9 @@ class MainScreenStateless extends StatelessWidget {
 
   void _tabSelector() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setInt('tabIndex', appController.selectedIndex.value);
+    pref.setInt(tabIndex, appController.selectedIndex.value);
   }
-
+  
   void _setTabIndex(int index) {
     appController.setTabIndex(index);
   }
@@ -171,7 +172,7 @@ class MainScreenStateless extends StatelessWidget {
     // SystemSound.play(SystemSoundType.click);
 
     _setTabIndex(index);
-
+    
     switch (index) {
       case 0:
         if (appController.isFeatured.isFalse) {
@@ -198,28 +199,28 @@ class MainScreenStateless extends StatelessWidget {
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     if (index == 0 || index == 2) {
-      pref.setInt('tabIndex', index);
-
+      pref.setInt(tabIndex, index);
+      
       return;
     }
 
     showSnackbar(SnackPosition.TOP, 'Not active now...', 'Check back later!');
 
-    if (pref.getInt('tabIndex') == 0 &&
+    if (pref.getInt(tabIndex) == 0 &&
         (index == 1 || index == 3 || index == 4)) {
       Timer(const Duration(milliseconds: 1500), () {
         _setTabIndex(0);
       });
     }
 
-    if (pref.getInt('tabIndex') == 2 &&
+    if (pref.getInt(tabIndex) == 2 &&
         (index == 1 || index == 3 || index == 4)) {
       Timer(const Duration(milliseconds: 1500), () {
         _setTabIndex(2);
       });
     }
   }
-
+  
   void showSnackbar(SnackPosition position, String title, String message) {
     Get.snackbar(
       '',

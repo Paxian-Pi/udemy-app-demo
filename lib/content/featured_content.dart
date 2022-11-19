@@ -17,7 +17,6 @@ class FeaturedContent extends StatefulWidget {
 }
 
 class _FeaturedContentState extends State<FeaturedContent> {
-
   bool _isInfoBar = true;
 
   @override
@@ -36,9 +35,7 @@ class _FeaturedContentState extends State<FeaturedContent> {
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: 6.h,
-              decoration: BoxDecoration(
-                color: Colors.purple[700]
-              ),
+              decoration: BoxDecoration(color: Colors.purple[700]),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -151,39 +148,35 @@ class _FeaturedContentState extends State<FeaturedContent> {
                     children: [
                       Row(
                         children: category1
-                            .map(
-                              (e) => CustomButton(
-                                text: '${e['name']}',
-                                padding:
-                                    const EdgeInsets.only(top: 5, right: 10),
-                                onPressed: () {
-                                  HapticFeedback.vibrate();
-                                  SystemSound.play(SystemSoundType.click);
+                            .map((e) => CustomButton(
+                                  text: '${e['name']}',
+                                  padding:
+                                      const EdgeInsets.only(top: 5, right: 10),
+                                  onPressed: () {
+                                    HapticFeedback.vibrate();
+                                    SystemSound.play(SystemSoundType.click);
 
-                                  showSnackbar(
-                                      'What To Learn Today!', '${e['name']}');
-                                },
-                              ),
-                            )
+                                    showSnackbar(
+                                        'What To Learn Today!', '${e['name']}');
+                                  },
+                                ))
                             .toList(),
                       ),
                       const SizedBox(height: 5),
                       Row(
                         children: category2
-                            .map(
-                              (e) => CustomButton(
-                                text: '${e['name']}',
-                                padding:
-                                    const EdgeInsets.only(top: 5, right: 10),
-                                onPressed: () {
-                                  HapticFeedback.vibrate();
-                                  SystemSound.play(SystemSoundType.click);
+                            .map((e) => CustomButton(
+                                  text: '${e['name']}',
+                                  padding:
+                                      const EdgeInsets.only(top: 5, right: 10),
+                                  onPressed: () {
+                                    HapticFeedback.vibrate();
+                                    SystemSound.play(SystemSoundType.click);
 
-                                  showSnackbar(
-                                      'What To Learn Today!', '${e['name']}');
-                                },
-                              ),
-                            )
+                                    showSnackbar(
+                                        'What To Learn Today!', '${e['name']}');
+                                  },
+                                ))
                             .toList(),
                       ),
                     ],

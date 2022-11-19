@@ -6,14 +6,9 @@ import 'package:udemy_clone/content/my_learning_content.dart';
 
 import '../service/app_state.dart';
 
-class MyLearning extends StatefulWidget {
-  const MyLearning({Key? key}) : super(key: key);
+class MyLearning extends StatelessWidget {
+  MyLearning({Key? key}) : super(key: key);
 
-  @override
-  State<MyLearning> createState() => _MyLearningState();
-}
-
-class _MyLearningState extends State<MyLearning> {
   final AppState appStateController = Get.find();
 
   @override
@@ -24,9 +19,10 @@ class _MyLearningState extends State<MyLearning> {
         return appStateController.isFilterIconVisible.isTrue
             ? const DevContent()
             : appStateController.selectedIndex.value == 0
-                ? const FeaturedContent()
-                : const MyLearningContent();
+            ? const FeaturedContent()
+            : const MyLearningContent();
       }),
     );
   }
 }
+

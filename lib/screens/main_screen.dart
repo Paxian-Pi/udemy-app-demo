@@ -151,7 +151,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: appStateController.isFeatured.isTrue
           ? const FeaturedContent()
-          : const MyLearning(),
+          : MyLearning(),
       bottomNavigationBar: Obx(() {
         return BottomNavigationBar(
           backgroundColor: Colors.white,

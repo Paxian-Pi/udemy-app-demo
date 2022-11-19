@@ -14,6 +14,8 @@ const favourite2 = 'assets/favourite2.png';
 const profile = 'assets/profile.png';
 const profile2 = 'assets/profile2.png';
 
+const tabIndex = 'tabIndex';
+
 const kPrimaryColor = Color(0xFFF8F5F5);
 const kTextShadowColor = Color(0x4D000000);
 const kRatingColor = Color.fromARGB(255, 209, 128, 8);
